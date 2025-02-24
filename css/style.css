@@ -1,0 +1,77 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+h1 {
+  margin: 30px;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+}
+
+.form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 20px;
+  background-color: #eeeeee;
+  padding: 20px;
+  border-radius: 5px;
+  width: 100%;
+  max-width: 500px;
+}
+
+input[type="text"] {
+  padding: 5px;
+  font-size: 20px;
+}
+
+.btn {
+  color: white;
+  background-color: #ec4826;
+  border: none;
+  padding: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  text-align: center;
+}
+
+.btn:hover {
+  background-color: #ec4726e1;
+}
+
+.tasks {
+  margin-top: 50px;
+  border-radius: 5px;
+  padding: 20px;
+  background-color: #eeeeee;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+  max-width: 500px;
+}
+
+.task {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  background-color: white;
+  border-radius: 5px;
+}
+
+.task .content {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  font-weight: bold;
+}
