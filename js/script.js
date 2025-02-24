@@ -1,7 +1,6 @@
 let submitBtn = document.querySelector(".add");
 let input = document.querySelector(".input");
 let tasks = document.querySelector(".tasks");
-tasks.style.display = "none";
 let eachTask = JSON.parse(localStorage.getItem("tasks")) || [];
 
 submitBtn.addEventListener("click", function () {
