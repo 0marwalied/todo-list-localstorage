@@ -1,39 +1,53 @@
-let submitBtn = document.querySelector(".add");
-let input = document.querySelector(".input");
-let tasks = document.querySelector(".tasks");
-let eachTask = JSON.parse(localStorage.getItem("tasks")) || [];
+let submitBtn = document.querySelector(`input[type="submit"]`);
+let localStorageList = JSON.parse(localStorage.getItem(`tasks`)) || [];
+let task = document.querySelector(`input[type="text"]`);
+let tasksDiv = document.querySelector(`.tasks`);
+let clearBtn = document.querySelector(`input[value="clear"]`);
 
-submitBtn.addEventListener("click", function () {
-  if (input.value === "") return;
-  createTask(input.value);
-  eachTask.push(input.value);
-  localStorage.setItem("tasks", JSON.stringify(eachTask));
-  input.value = "";
-});
+clearBtn.addEventListener(
+  "click",
+  () => ((localStorageList = []), showTasks())
+);
 
-function removeTask(idx) {
-  let task = tasks.children[idx];
-  if (task) {
-    tasks.removeChild(task);
-    eachTask.splice(idx, 1);
-    localStorage.setItem("tasks", JSON.stringify(eachTask));
-  }
-  if (eachTask.length == 0) tasks.style.display = "none";
+function addTask(content) {
+  if (content === ``) return;
+  localStorageList.push({ task: content });
+  localStorage.setItem(`tasks`, JSON.stringify(localStorageList));
 }
 
 function createTask(content) {
-  tasks.style.display = "flex";
-  console.log("hello");
-  let task = document.createElement("div");
-  task.classList.add("task");
-  task.innerHTML = `
-  <p class="content">${content}</p>
-  <input type="button" class="btn" value="Delete"/>
-  `;
-  task.querySelector(".btn").addEventListener("click", function () {
-    removeTask(Array.from(tasks.children).indexOf(task));
-  });
-  tasks.appendChild(task);
+  let task = document.createElement(`div`);
+  task.className = `task`;
+  task.innerHTML += `<p class="content">${content}</p>`;
+  task.innerHTML += `<input type="button" value="Delete" class="btn"/>`;
+  task
+    .querySelector(`.btn`)
+    .addEventListener("click", () =>
+      removeTask(Array.from(tasksDiv.children).indexOf(task))
+    );
+  return task;
 }
 
-eachTask.forEach((task) => createTask(task));
+function showTasks() {
+  if (localStorageList.length) tasksDiv.style.display = `flex`;
+  else tasksDiv.style.display = `none`;
+  tasksDiv.innerHTML = ``;
+  localStorage.setItem(`tasks`, JSON.stringify(localStorageList));
+  localStorageList.forEach((element) => {
+    tasksDiv.appendChild(createTask(element.task));
+  });
+}
+
+function removeTask(idx) {
+  localStorageList = localStorageList.filter((item, index) => index !== idx);
+  localStorage.setItem(`tasks`, JSON.stringify(localStorageList));
+  showTasks();
+}
+
+submitBtn.addEventListener("click", function () {
+  addTask(task.value);
+  task.value = ``;
+  showTasks();
+});
+
+showTasks();

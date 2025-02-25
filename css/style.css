@@ -77,3 +77,9 @@ input[type="text"] {
     Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   font-weight: bold;
 }
+
+.clear {
+  position: absolute;
+  bottom: 50px;
+  right: 20px;
+}
